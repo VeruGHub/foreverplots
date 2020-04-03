@@ -1,2 +1,2 @@
 # foreverplots
-For these essential plots for our articles
+For those essential plots for our articles
