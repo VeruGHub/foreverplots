@@ -78,7 +78,7 @@ map_marked <- map_back +
 rectangle <- data.frame(long=c(1.5, 2.4, 2.4, 1.5, 1.5),
                         lat=c(41.72, 41.72, 41.3, 41.3, 41.72))
 map_marked2 <-  map_marked + 
-  geom_path(data=rectangle, aes(x = cx,  y = cy),
+  geom_path(data=rectangle, aes(x = long,  y = lat),
             size=1, color="darkred", inherit.aes = TRUE)
 
 ggsave(filename = "Result_figures/loc1.png", plot = map_marked2, 
@@ -91,7 +91,7 @@ ggsave(filename = "Result_figures/loc1.png", plot = map_marked2,
 plots <- shapefile("Examples_data/ParcelasETRS8931.shp")
 plots$'Forest type' <- factor(plots$CATEGORIA, levels=c("BP","BN","BMN"),
                               labels = c("Long-established", "Post-50", "Post-80"))
-load("Examples_data/prec_wc.penin.masked.Rdata")
+load("Examples_data/prec.Rdata")
 
 proj4string(plots) 
 plots <- spTransform(plots,

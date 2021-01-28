@@ -1,9 +1,6 @@
 
 library(tidyverse)
-
-#For examples:
-plot_clima <- read.csv("Examples_data/plot_clima.csv")
-
+library(datasets)
 
 ##### Paloma exploratory plot #####
 
@@ -27,8 +24,8 @@ panel.cor <- function(x, y, digits=2, prefix="", cex.cor, ...)
   text(0.5, 0.5, txt, cex = cex.cor*r) # * r) to have coefficients in the same size
 }
 
-df <- plot_clima %>% 
-  dplyr::select(year2, ba_ha2, dens2, mdbh2, tipo, grupo23)
+df <- iris %>% 
+  dplyr::select(Sepal.Length:Petal.Width)
 
 pairs(df, diag.panel = panel.hist, 
       upper.panel = panel.smooth, lower.panel = panel.cor,
@@ -39,9 +36,8 @@ pairs(df, diag.panel = panel.hist,
 
 library(corrplot)
 
-c <- plot_clima %>% 
-  dplyr::select(year2, ba_ha2, dens2, mdbh2, year3, ba_ha3, dens3,
-                mdbh3, year4, ba_ha4, dens4, mdbh4)
+c <- iris %>% 
+  dplyr::select(Sepal.Length:Petal.Width)
   
 c2 <- cor(c,method = "pearson")
 
@@ -53,9 +49,8 @@ corrplot(c2, method="circle",type="upper", tl.pos="td", tl.cex=0.8,
 
 library(GGally)
 
-plot_clima %>% 
-  dplyr::select(year2, ba_ha2, dens2, mdbh2, tipo, grupo23) %>% 
-  ggpairs(aes(color = tipo), 
+iris %>% 
+  ggpairs(aes(color = Species), 
           upper = list(continuous = wrap('cor', size = 3)),
           lower = list(combo = wrap("facethist", bins = 15), 
                        continuous = wrap("smooth_loess", alpha=0.3, size=0.1)),
